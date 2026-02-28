@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    initGA4();
+    initGTM();
 
     $.get("common", function(data) {
         console.log("Content loaded successfully:", data);
@@ -18,20 +18,19 @@ function arrayContainsArray(superset, subset) {
     });
 }
 
-function initGA4() {
-  const GA_ID = "G-EHSZYMDK3M";
+function initGTM() {
+  const GTM_ID = "GTM-NMDC5OHX";
 
-  if (window.gtag) return;
+  if (window.dataLayer) return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'gtm.start': new Date().getTime(),
+    event: 'gtm.js'
+  });
 
   const script = document.createElement("script");
   script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
   document.head.appendChild(script);
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  window.gtag = gtag;
-
-  gtag("js", new Date());
-  gtag("config", GA_ID, { send_page_view: true });
 }
